@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: "Poppins";
+    src: url("../src/assets/fonts/Poppins-Regular.ttf");
+  }
+  
+  * {
+    font-family: 'Poppins', sans-serif;
+  }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+$primary-color: #3CB371;
+$terciary-color: #1B3022;
+$secondary-color: #2f4737;
+
+
+.botoes-acao-listagem {
+  align-items: self-end;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1%;  
+}
+
+.botoes-acao-registro {  
+  display: flex;
+  justify-content: flex-end;  
+}
+
+
+.sidebar-logo{
+  background-color: $primary-color!important;
+}
+
+.ant-layout-sider-children{
+  background-color: $secondary-color!important;
+}
+
+.ant-menu.ant-menu-dark{
+  background-color: $secondary-color!important;
+  .ant-menu-inline.ant-menu-sub{
+    background-color: $terciary-color!important;
+  }
+  .ant-menu-item-selected{
+    background-color: $primary-color!important;
+  }
+}
+
+.ant-table-thead  th{
+  background-color: $secondary-color!important;
+  color: white!important;
+}
+
+.ant-btn-primary{
+  background-color: $primary-color!important;
+}

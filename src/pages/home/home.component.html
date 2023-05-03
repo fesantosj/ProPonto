@@ -1,0 +1,83 @@
+<content *ngIf="isCadastroEdicao; else Listagem">
+  <form
+    nz-form
+    [nzLayout]="'vertical'"
+    [formGroup]="formLogin"
+    (ngSubmit)="acaoSubmit()"
+  >  
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="8">
+        <nz-form-item>
+          <nz-form-label nzFor="nome">Nome</nz-form-label>
+          <nz-form-control nzErrorTip="Preencher">
+            <input nz-input formControlName="nome" id="nome" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="8">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="email">E-mail</nz-form-label>
+          <nz-form-control nzErrorTip="Preencher">
+            <input nz-input formControlName="email" id="email" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="8">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="email">E-mail</nz-form-label>
+          <nz-form-control nzErrorTip="Preencher">
+            <input nz-input formControlName="email" id="email" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <nz-divider></nz-divider>
+    <div class="botoes-acao-registro">
+      <button type="submit" nz-button nzType="primary">
+        <i class="fa-regular fa-square-check"></i>&nbsp;&nbsp;SALVAR</button
+      >&nbsp;
+      <button type="reset" nz-button nzType="default" (click)="acaoCancel()">
+        <i class="fa-regular fa-circle-xmark"></i>&nbsp;&nbsp; CANCELAR
+      </button>
+    </div>
+  </form>
+</content>
+<ng-template #Listagem>
+  <div class="botoes-acao-listagem">
+    <button type="submit" nz-button nzType="primary" (click)="goCadastrar()">
+      <i class="fa-regular fa-square-plus"></i>&nbsp;&nbsp;CADASTRAR
+    </button>
+  </div>
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <nz-table #sortTable [nzData]="dadosTabela">
+        <thead>
+          <tr>
+            <th *ngFor="let coluna of colunas" [nzSortFn]="coluna.compare">
+              {{ coluna.title }}
+            </th>
+            <th>Ação</th>     
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of sortTable.data">
+            <td>{{ item.nome }}</td>
+            <td>{{ item.idade }}</td>
+            <td>{{ item.email }}</td>
+            <td>
+              <button nz-button nz-dropdown [nzDropdownMenu]="menuAcoes">
+                <i class="fa-solid fa-ellipsis"></i>
+              </button>
+              <nz-dropdown-menu #menuAcoes="nzDropdownMenu">
+                <ul nz-menu>
+                  <li nz-menu-item (click)="goEditar()"><i class="fa-regular fa-pen-to-square"></i>&nbsp;&nbsp;Editar</li>
+                  <li nz-menu-item (click)="goExcluir(item.id)"><i class="fa-regular fa-trash-can"></i>&nbsp;&nbsp;Excluir</li>                 
+                </ul>
+              </nz-dropdown-menu>
+            </td>       
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</ng-template>

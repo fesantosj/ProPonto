@@ -1,0 +1,15 @@
+<content *ngIf="isLogin; else isRegister">
+  <div id="tela">
+    <div class="formulario">
+      <div id="left">
+        <button (click)="goRegistrar()">REGISTRAR-SE</button>
+      </div>
+      <div id="right">
+      </div>
+    </div>
+  </div>
+</content>
+<ng-template #isRegister>
+  <h2>REGISTRAR</h2>
+  <button (click)="goLogar()">LOGAR</button>
+</ng-template>
