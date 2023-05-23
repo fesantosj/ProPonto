@@ -9,6 +9,9 @@ export class CargoProvider {
     criarCargo: () => {
       return environment.apiUrl + 'api/cargo/criarCargo';
     },
+    listarCargos: () => {
+      return environment.apiUrl + 'api/cargo/listarCargos';
+    },
   };
 
   constructor(private restAxios: RestApiAxiosService) {}
@@ -36,4 +39,15 @@ export class CargoProvider {
         return this.tratamentoErro(error.response.data).toPromise();
       });
   }
+
+  public async listarCargos() {    
+    let httpOptions = await this.optionsPadrao('');
+    return  this.restAxios.getAllDados(this.routes.listarCargos(), {httpOptions}).then((response) => {
+      return response.data;
+    }).catch((error) => {
+      return this.tratamentoErro(error.response.data).toPromise();      
+    });
+  }
+
+
 }

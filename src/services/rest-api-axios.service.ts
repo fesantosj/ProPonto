@@ -9,13 +9,13 @@ export class RestApiAxiosService {
 
   constructor() { }
   
-  getAllDados(local: string, options: any) {
-    return instance.get(local, options);
-  }
-
   postAllDados(local: string, params?: any, options?: any) {
     return instance.post(local, params, {headers: options});
   } 
+
+  getAllDados(local: string, options: any) {
+    return instance.get(local, options);
+  }  
   
   putAllDados(local: string, params?: any, options?: any) {
     return instance.put(local, params, { headers: { 'Content-Type': 'application/x-www-form-urlencoded', options } });
