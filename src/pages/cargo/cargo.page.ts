@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { CargoProvider } from 'src/providers/CargoProvider';
 
 interface Pessoa {
   id: number;
@@ -10,12 +10,12 @@ interface Pessoa {
 }
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'page-cargo',
+  templateUrl: './cargo.page.html',
+  styleUrls: ['./cargo.page.scss'],
 })
-export class HomeComponent implements OnInit{
-  formLogin: FormGroup;
+export class CargoPage implements OnInit {
+  formCadastro: FormGroup;
   isCadastroEdicao: boolean = false;
 
   dadosTabela: Pessoa[] = [];
@@ -27,35 +27,37 @@ export class HomeComponent implements OnInit{
     },
     {
       title: 'Idade',
-      compare: (a: Pessoa, b: Pessoa) => a.idade - b.idade,      
+      compare: (a: Pessoa, b: Pessoa) => a.idade - b.idade,
     },
     {
       title: 'Email',
-      compare: (a: Pessoa, b: Pessoa) => a.email.localeCompare(b.email),      
-    },    
+      compare: (a: Pessoa, b: Pessoa) => a.email.localeCompare(b.email),
+    },
   ];
   
-  constructor(private formBuilder: FormBuilder) {
-    this.formLogin = this.formBuilder.group({
-      nome: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      cpf: ['', [Validators.required]],
+  constructor(private formBuilder: FormBuilder, private cargoProvider: CargoProvider) {
+    this.formCadastro = this.formBuilder.group({
+      descricao: ['', [Validators.required]],     
     });
-    
   }
-  
+
   ngOnInit(): void {
     this.dadosTabela = new Array(15).fill(0).map((_, index) => ({
       id: 1 + index,
       nome: `Luiz ${index}`,
       idade: 1 + index,
-      email: `Vila Rica ${index}`
+      email: `Vila Rica ${index}`,
     }));
-  }  
+  }
 
   acaoSubmit() {
-    console.log(this.formLogin.value);
-    console.log('Logica submit');
+    console.log(this.formCadastro.value);
+
+    let cadastro = this.formCadastro.value
+    this.cargoProvider.criarCargo(cadastro).then((response) => {     
+    }).catch((error) => {
+      console.log("erro");
+    });
   }
 
   acaoCancel() {
@@ -72,6 +74,6 @@ export class HomeComponent implements OnInit{
   }
 
   goExcluir(pId: Number) {
-    console.log("EXCLUIR PAPAI O ID ->"+pId);
+    console.log('EXCLUIR PAPAI O ID ->' + pId);
   }
 }

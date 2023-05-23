@@ -11,6 +11,7 @@ export class LayoutComponent {
   menuCadastro = [
     { path: 'home', title: 'Home' },
     { path: 'login', title: 'Login' },
+    { path: 'cargo', title: 'Cargo' },
     { path: 'register', title: 'Register' },
   ];
 

@@ -21,6 +21,18 @@ const routes: Routes = [
     ],
   },
   {
+    path: '',
+    canActivate: [AuthGuard],
+    component: LayoutComponent,
+    children: [
+      {
+        path:'cargo',
+        loadChildren: () =>
+          import('src/pages/cargo/cargo.module').then((m) => m.CargoModule),
+      },
+    ],
+  },
+  {
     path: '',    
     component: LayoutComponent,
     children: [
